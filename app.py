@@ -1,19 +1,21 @@
 import io
+import os
 import zipfile
+
 import PyPDF2
 import fitz
 import openpyxl
-from flask_cors import CORS
-from flask import Flask, request, jsonify
-from pdf2docx import Converter
-from flask import Flask, request, send_file
-# from pdf2pptx import pdf2pptx
-import pandas as  pd
+import pandas as pd
 import tabula
-import os
+from flask import Flask, request, send_file
+from flask_cors import CORS
+from pdf2docx import Converter
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
+
+load_dotenv()
 
 #Convert PDF to Word
 @app.route('/convert', methods=['POST'])
@@ -133,5 +135,5 @@ def convert_to_excel():
 
 
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
+    port = int(os.environ.get("PORT"))
     app.run(host='0.0.0.0', port=5000)
